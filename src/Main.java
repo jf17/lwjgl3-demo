@@ -16,6 +16,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class Main {
 
+    DataClass data ;
+
 
     // The window handle
     private long window;
@@ -24,6 +26,8 @@ public class Main {
         System.out.println("Hello LWJGL " + Version.getVersion() + "!");
 
         init();
+        HelloSwing swng = new HelloSwing(data);
+        swng.setVisible(true);
         loop();
 
         // Free the window callbacks and destroy the window
@@ -36,6 +40,9 @@ public class Main {
     }
 
     private void init() {
+
+        data = new DataClass();
+
         // Setup an error callback. The default implementation
         // will print the error message in System.err.
         GLFWErrorCallback.createPrint(System.err).set();
@@ -50,7 +57,7 @@ public class Main {
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); // the window will be resizable
 
         // Create the window
-        window = glfwCreateWindow(888, 888, "Hello LWJGL 3 !!!' .", NULL, NULL);
+        window = glfwCreateWindow(960, 960, "Test LWJGL 3 + Swing .", NULL, NULL);
         if ( window == NULL )
             throw new RuntimeException("Failed to create the GLFW window");
 
@@ -59,19 +66,19 @@ public class Main {
             if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
                 glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
             else if(key == GLFW_KEY_UP && action == GLFW_RELEASE){
-                up_view_roty += PLUS;
-                down_view_roty += PLUS;
+               data.setUp_view_roty(data.getUp_view_roty() + data.getPLUS());
+               data.setDown_view_roty(data.getDown_view_roty() + data.getPLUS());
             }else if(key == GLFW_KEY_DOWN && action == GLFW_RELEASE){
-                up_view_roty += -PLUS;
-                down_view_roty += - PLUS;
+               data.setUp_view_roty(data.getUp_view_roty() - data.getPLUS()); ;
+               data.setDown_view_roty(data.getDown_view_roty() - data.getPLUS());
             }else if(key == GLFW_KEY_LEFT && action == GLFW_RELEASE){
-                right_view_rotx += - PLUS;
-                left_view_rotx += -PLUS;
+               data.setRight_view_rotx(data.getRight_view_rotx() - data.getPLUS());
+                data.setLeft_view_rotx(data.getLeft_view_rotx() - data.getPLUS());
             }else if(key == GLFW_KEY_RIGHT && action == GLFW_RELEASE){
-                right_view_rotx += PLUS;
-                left_view_rotx += PLUS;
+               data.setRight_view_rotx(data.getRight_view_rotx() + data.getPLUS());
+                data.setLeft_view_rotx(data.getLeft_view_rotx() + data.getPLUS());
             }else if(key == GLFW_KEY_Z && action == GLFW_RELEASE){
-                right_view_rotx = 0.05f; left_view_rotx = -0.05f; up_view_roty = 0.05f; down_view_roty = -0.05f;
+                data.setDefault();
             }
         });
 
@@ -147,15 +154,13 @@ public class Main {
         glEnd();
     }
 
-    float right_view_rotx = 0.05f, left_view_rotx = -0.05f, up_view_roty = 0.05f ,down_view_roty = -0.05f ,view_rotz=0.05f , PLUS = 0.06f;
-
     void renderSQR(){
 
         glBegin(GL_POLYGON);
-        glVertex2f(left_view_rotx, down_view_roty);
-        glVertex2f(left_view_rotx, up_view_roty);
-        glVertex2f(right_view_rotx, up_view_roty);
-        glVertex2f(right_view_rotx, down_view_roty);
+        glVertex2f(data.getLeft_view_rotx(), data.getDown_view_roty());
+        glVertex2f(data.getLeft_view_rotx(), data.getUp_view_roty());
+        glVertex2f(data.getRight_view_rotx(), data.getUp_view_roty());
+        glVertex2f(data.getRight_view_rotx(), data.getDown_view_roty());
         glEnd();
 
 
@@ -214,6 +219,7 @@ public class Main {
         }
     }
     public static void main(String[] args) {
+
         new Main().run();
     }
 }
