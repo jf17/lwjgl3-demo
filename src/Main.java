@@ -58,6 +58,7 @@ public class Main {
 
         // Create the window
         window = glfwCreateWindow(960, 960, "Test LWJGL 3 + Swing .", NULL, NULL);
+		glfwSetWindowPos(window,5,30);
         if ( window == NULL )
             throw new RuntimeException("Failed to create the GLFW window");
 
@@ -94,11 +95,11 @@ public class Main {
             GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
             // Center the window
-            glfwSetWindowPos(
-                    window,
-                    (vidmode.width() - pWidth.get(0)) / 2,
-                    (vidmode.height() - pHeight.get(0)) / 2
-            );
+           // glfwSetWindowPos(
+            //        window,
+            //        (vidmode.width() - pWidth.get(0)) / 2,
+            //        (vidmode.height() - pHeight.get(0)) / 2
+           // );
         } // the stack frame is popped automatically
 
         // Make the OpenGL context current

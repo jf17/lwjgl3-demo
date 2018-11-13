@@ -18,6 +18,7 @@ public class HelloSwing extends JFrame {
 
         super();
         this.setSize(300, 200);
+        this.setLocation(960,100);
         this.getContentPane().setLayout(null);
         this.add(getJLabel(), null);
         this.add(getJTextField(), null);
