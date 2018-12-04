@@ -17,6 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class Main {
 
     DataClass data ;
+    final  float COEFFICIENT = 0.0010416666666667f;
 
 
     // The window handle
@@ -54,11 +55,11 @@ public class Main {
         // Configure GLFW
         glfwDefaultWindowHints(); // optional, the current window hints are already the default
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE); // the window will stay hidden after creation
-        glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); // the window will be resizable
+        glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE); // the window will be resizable
 
         // Create the window
         window = glfwCreateWindow(960, 960, "Test LWJGL 3 + Swing .", NULL, NULL);
-		glfwSetWindowPos(window,5,30);
+        glfwSetWindowPos(window,5,30);
         if ( window == NULL )
             throw new RuntimeException("Failed to create the GLFW window");
 
@@ -95,9 +96,9 @@ public class Main {
             GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
             // Center the window
-           // glfwSetWindowPos(
-            //        window,
-            //        (vidmode.width() - pWidth.get(0)) / 2,
+          //  glfwSetWindowPos(
+           //         window,
+             //       (vidmode.width() - pWidth.get(0)) / 2,
             //        (vidmode.height() - pHeight.get(0)) / 2
            // );
         } // the stack frame is popped automatically
@@ -120,44 +121,23 @@ public class Main {
     // FloatBuffer for transferring matrices to OpenGL
     FloatBuffer fb = BufferUtils.createFloatBuffer(16);
 
-    void renderCube() {
-        glBegin(GL_QUADS);
-        glColor3f(   0.0f,  0.0f,  0.2f );
-        glVertex3f(  0.5f, -0.5f, -0.5f );
-        glVertex3f( -0.5f, -0.5f, -0.5f );
-        glVertex3f( -0.5f,  0.5f, -0.5f );
-        glVertex3f(  0.5f,  0.5f, -0.5f );
-        glColor3f(   0.0f,  0.0f,  1.0f );
-        glVertex3f(  0.5f, -0.5f,  0.5f );
-        glVertex3f(  0.5f,  0.5f,  0.5f );
-        glVertex3f( -0.5f,  0.5f,  0.5f );
-        glVertex3f( -0.5f, -0.5f,  0.5f );
-        glColor3f(   1.0f,  0.0f,  0.0f );
-        glVertex3f(  0.5f, -0.5f, -0.5f );
-        glVertex3f(  0.5f,  0.5f, -0.5f );
-        glVertex3f(  0.5f,  0.5f,  0.5f );
-        glVertex3f(  0.5f, -0.5f,  0.5f );
-        glColor3f(   0.2f,  0.0f,  0.0f );
-        glVertex3f( -0.5f, -0.5f,  0.5f );
-        glVertex3f( -0.5f,  0.5f,  0.5f );
-        glVertex3f( -0.5f,  0.5f, -0.5f );
-        glVertex3f( -0.5f, -0.5f, -0.5f );
-        glColor3f(   0.0f,  1.0f,  0.0f );
-        glVertex3f(  0.5f,  0.5f,  0.5f );
-        glVertex3f(  0.5f,  0.5f, -0.5f );
-        glVertex3f( -0.5f,  0.5f, -0.5f );
-        glVertex3f( -0.5f,  0.5f,  0.5f );
-        glColor3f(   0.0f,  0.2f,  0.0f );
-        glVertex3f(  0.5f, -0.5f, -0.5f );
-        glVertex3f(  0.5f, -0.5f,  0.5f );
-        glVertex3f( -0.5f, -0.5f,  0.5f );
-        glVertex3f( -0.5f, -0.5f, -0.5f );
+    void renderCenterLines() {
+        glBegin(GL_LINES);
+        glColor3f( 0.0f, 0.4f, 0.2f ); // цвет
+        glVertex2f(-50*COEFFICIENT, 0f);
+        glVertex2f(50*COEFFICIENT, 0f);
+        glEnd();
+        glBegin(GL_LINES);
+        glColor3f( 0.0f, 0.4f, 0.2f ); // цвет
+        glVertex2f(0, -50*COEFFICIENT);
+        glVertex2f(0, 50*COEFFICIENT);
         glEnd();
     }
 
     void renderSQR(){
 
         glBegin(GL_POLYGON);
+        glColor3f( 0.0f, 0.2f, 0.0f ); // цвет
         glVertex2f(data.getLeft_view_rotx(), data.getDown_view_roty());
         glVertex2f(data.getLeft_view_rotx(), data.getUp_view_roty());
         glVertex2f(data.getRight_view_rotx(), data.getUp_view_roty());
@@ -193,6 +173,7 @@ public class Main {
 
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 
+            renderCenterLines();
             renderSQR();
 
 
