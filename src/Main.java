@@ -11,6 +11,7 @@ import org.joml.Matrix4f;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.glColor3f;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
@@ -121,14 +122,28 @@ public class Main {
     // FloatBuffer for transferring matrices to OpenGL
     FloatBuffer fb = BufferUtils.createFloatBuffer(16);
 
+
+
+    void renderSQRmini(){
+
+        glBegin(GL_POLYGON);
+        glColor3f( 0.3f, 0.0f, 0.0f ); // цвет
+        glVertex2f(-20*COEFFICIENT, -20*COEFFICIENT);
+        glVertex2f(-20*COEFFICIENT, 20*COEFFICIENT);
+        glVertex2f(20*COEFFICIENT, 20*COEFFICIENT);
+        glVertex2f(20*COEFFICIENT, -20*COEFFICIENT);
+        glEnd();
+
+
+    }
+
     void renderCenterLines() {
         glBegin(GL_LINES);
-        glColor3f( 0.0f, 0.4f, 0.2f ); // цвет
+        glColor3f(0.0f, 0.0f, 0.9f );// цвет
         glVertex2f(-50*COEFFICIENT, 0f);
         glVertex2f(50*COEFFICIENT, 0f);
         glEnd();
         glBegin(GL_LINES);
-        glColor3f( 0.0f, 0.4f, 0.2f ); // цвет
         glVertex2f(0, -50*COEFFICIENT);
         glVertex2f(0, 50*COEFFICIENT);
         glEnd();
@@ -137,7 +152,7 @@ public class Main {
     void renderSQR(){
 
         glBegin(GL_POLYGON);
-        glColor3f( 0.0f, 0.2f, 0.0f ); // цвет
+        glColor4f( 0f, 0f, 0.9f ,0.5f); // цвет + прозрачность
         glVertex2f(data.getLeft_view_rotx(), data.getDown_view_roty());
         glVertex2f(data.getLeft_view_rotx(), data.getUp_view_roty());
         glVertex2f(data.getRight_view_rotx(), data.getUp_view_roty());
@@ -173,8 +188,13 @@ public class Main {
 
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 
+
+            glEnable(GL_BLEND); // прозрачность
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // прозрачность
             renderCenterLines();
+            renderSQRmini();
             renderSQR();
+            glDisable(GL_BLEND); // прозрачность
 
 
             /*
