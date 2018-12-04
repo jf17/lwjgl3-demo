@@ -3,6 +3,17 @@ package ru.jf17.demo;
 public class DataClass {
 
 private    float right_view_rotx , left_view_rotx , up_view_roty ,down_view_roty ,view_rotz, PLUS ;
+    private   float transparency; // прозрачность
+
+
+    public float getTransparency() {
+        return transparency;
+    }
+
+    public void setTransparency() {
+        if(transparency==0.5f){transparency=1f;}else{transparency=0.5f;}
+    }
+
 
     public DataClass() {
         right_view_rotx = 0.05f;
@@ -11,6 +22,7 @@ private    float right_view_rotx , left_view_rotx , up_view_roty ,down_view_roty
         down_view_roty = -0.05f;
         view_rotz = 0.05f;
         PLUS = 0.06f;
+        transparency = 0.5f;
 
     }
     public void setDefault(){
@@ -19,6 +31,7 @@ private    float right_view_rotx , left_view_rotx , up_view_roty ,down_view_roty
         up_view_roty = 0.05f;
         down_view_roty = -0.05f;
         view_rotz = 0.05f;
+        transparency = 0.5f;
     }
 
     public float getPLUS() {

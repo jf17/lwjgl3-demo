@@ -152,7 +152,7 @@ public class Main {
     void renderSQR(){
 
         glBegin(GL_POLYGON);
-        glColor4f( 0f, 0f, 0.9f ,0.5f); // цвет + прозрачность
+        glColor4f( 0f, 0f, 0.9f ,data.getTransparency()); // цвет + прозрачность
         glVertex2f(data.getLeft_view_rotx(), data.getDown_view_roty());
         glVertex2f(data.getLeft_view_rotx(), data.getUp_view_roty());
         glVertex2f(data.getRight_view_rotx(), data.getUp_view_roty());

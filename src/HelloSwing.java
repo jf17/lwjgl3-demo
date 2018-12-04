@@ -10,26 +10,37 @@ public class HelloSwing extends JFrame {
     JLabel jLabel;
     JTextField jTextField;
     JButton jButton;
+    JButton jButton2;
     DataClass data;
     ActionListener actionListener;
+    ActionListener actionListener2;
+    float transparency; // прозрачность
+    float transparencyON; // прозрачность
+    float transparencyOFF;
 
 
     public HelloSwing( DataClass data_IN) throws HeadlessException {
 
         super();
-        this.setSize(300, 200);
+         transparencyON = 0.5f;
+         transparencyOFF = 1f;
+
+        this.setSize(300, 400);
         this.setLocation(960,100);
         this.getContentPane().setLayout(null);
         this.add(getJLabel(), null);
         this.add(getJTextField(), null);
         this.add(getJButton(), null);
+        this.add(getJButton2(), null);
         this.setTitle("Hello LWJGL 3 + Swing.");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         data = data_IN;
 
         actionListener = new TestActionListener();
+        actionListener2 = new TestActionListener2();
 
         jButton.addActionListener(actionListener);
+        jButton2.addActionListener(actionListener2);
     }
 
     private javax.swing.JLabel getJLabel() {
@@ -58,6 +69,15 @@ public class HelloSwing extends JFrame {
         return jButton;
     }
 
+    private javax.swing.JButton getJButton2() {
+        if(jButton2 == null) {
+            jButton2 = new javax.swing.JButton();
+            jButton2.setBounds(58, 150, 200, 27);
+            jButton2.setText("Прозрачность ВКЛ/ВЫКЛ");
+        }
+        return jButton2;
+    }
+
 
     public class TestActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
@@ -67,4 +87,13 @@ public class HelloSwing extends JFrame {
             data.setDown_view_roty(data.getDown_view_roty() + data.getPLUS());
         }
     }
+
+    public class TestActionListener2 implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            //Код, который нужно выполнить при нажатии
+
+            data.setTransparency();
+        }
+    }
+
 }
