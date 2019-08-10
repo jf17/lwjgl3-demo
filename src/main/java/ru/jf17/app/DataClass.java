@@ -1,8 +1,8 @@
-package ru.jf17.demo;
+package ru.jf17.app;
 
 public class DataClass {
 
-private    float right_view_rotx , left_view_rotx , up_view_roty ,down_view_roty ,view_rotz, PLUS ;
+    private    float right_view_rotx , left_view_rotx , up_view_roty ,down_view_roty ,view_rotz, PLUS ;
     private   float transparency; // прозрачность
 
 

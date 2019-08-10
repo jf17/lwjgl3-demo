@@ -1,5 +1,4 @@
-package ru.jf17.demo;
-
+package ru.jf17.app;
 
 import org.lwjgl.*;
 import org.lwjgl.glfw.*;
@@ -69,16 +68,16 @@ public class Main {
             if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
                 glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
             else if(key == GLFW_KEY_UP && action == GLFW_RELEASE){
-               data.setUp_view_roty(data.getUp_view_roty() + data.getPLUS());
-               data.setDown_view_roty(data.getDown_view_roty() + data.getPLUS());
+                data.setUp_view_roty(data.getUp_view_roty() + data.getPLUS());
+                data.setDown_view_roty(data.getDown_view_roty() + data.getPLUS());
             }else if(key == GLFW_KEY_DOWN && action == GLFW_RELEASE){
-               data.setUp_view_roty(data.getUp_view_roty() - data.getPLUS()); ;
-               data.setDown_view_roty(data.getDown_view_roty() - data.getPLUS());
+                data.setUp_view_roty(data.getUp_view_roty() - data.getPLUS()); ;
+                data.setDown_view_roty(data.getDown_view_roty() - data.getPLUS());
             }else if(key == GLFW_KEY_LEFT && action == GLFW_RELEASE){
-               data.setRight_view_rotx(data.getRight_view_rotx() - data.getPLUS());
+                data.setRight_view_rotx(data.getRight_view_rotx() - data.getPLUS());
                 data.setLeft_view_rotx(data.getLeft_view_rotx() - data.getPLUS());
             }else if(key == GLFW_KEY_RIGHT && action == GLFW_RELEASE){
-               data.setRight_view_rotx(data.getRight_view_rotx() + data.getPLUS());
+                data.setRight_view_rotx(data.getRight_view_rotx() + data.getPLUS());
                 data.setLeft_view_rotx(data.getLeft_view_rotx() + data.getPLUS());
             }else if(key == GLFW_KEY_Z && action == GLFW_RELEASE){
                 data.setDefault();
@@ -97,11 +96,11 @@ public class Main {
             GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
             // Center the window
-          //  glfwSetWindowPos(
-           //         window,
-             //       (vidmode.width() - pWidth.get(0)) / 2,
+            //  glfwSetWindowPos(
+            //         window,
+            //       (vidmode.width() - pWidth.get(0)) / 2,
             //        (vidmode.height() - pHeight.get(0)) / 2
-           // );
+            // );
         } // the stack frame is popped automatically
 
         // Make the OpenGL context current

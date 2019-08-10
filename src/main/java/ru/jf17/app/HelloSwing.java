@@ -1,4 +1,4 @@
-package ru.jf17.demo;
+package ru.jf17.app;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,8 +22,8 @@ public class HelloSwing extends JFrame {
     public HelloSwing( DataClass data_IN) throws HeadlessException {
 
         super();
-         transparencyON = 0.5f;
-         transparencyOFF = 1f;
+        transparencyON = 0.5f;
+        transparencyOFF = 1f;
 
         this.setSize(300, 400);
         this.setLocation(960,100);
